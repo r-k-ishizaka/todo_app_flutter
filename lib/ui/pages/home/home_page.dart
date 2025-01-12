@@ -22,14 +22,18 @@ class HomePage extends ConsumerWidget {
         title: Text(title),
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
         itemCount: todoItems.length,
         itemBuilder: (BuildContext context, int index) {
-          return TodoItemWidget(
-            todoItem: todoItems[index],
-            onToggle: () {
-              // TODO チェックボックスのトグル時の処理を実装
-            },
+          return Column(
+            children: [
+              TodoItemWidget(
+                todoItem: todoItems[index],
+                onToggle: () {
+                },
+              ),
+              if (index != todoItems.length - 1) const Divider(),
+            ],
           );
         },
       ),
