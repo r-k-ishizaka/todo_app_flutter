@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/domain/models/todo_item.dart';
 import 'package:todo_app/domain/models/types/due_date_time.dart';
 import 'package:todo_app/ui/components/due_date_time_input_form_widget.dart';
 import 'package:todo_app/ui/components/text_input_widget.dart';
@@ -47,7 +48,16 @@ class _AddingTodoPageState extends State<AddingTodoPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: 保存処理を実装
+          if (dueDateTime == null || _titleController.text.isEmpty) {
+            return;
+          }
+          Navigator.pop(
+            context,
+            TodoItem(
+                title: _titleController.text,
+                isCompleted: false,
+                dueDateTime: dueDateTime!),
+          );
         },
         child: const Icon(Icons.save),
       ),
