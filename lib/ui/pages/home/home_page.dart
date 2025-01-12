@@ -30,6 +30,9 @@ class HomePage extends ConsumerWidget {
               TodoItemWidget(
                 todoItem: todoItems[index],
                 onToggle: () {
+                  ref
+                      .read(homeViewModelProvider.notifier)
+                      .completeTodoItem(index);
                 },
               ),
               if (index != todoItems.length - 1) const Divider(),
