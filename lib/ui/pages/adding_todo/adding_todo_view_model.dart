@@ -8,6 +8,7 @@ import '../../../domain/models/todo_item.dart';
 part 'adding_todo_view_model.freezed.dart';
 part 'adding_todo_view_model.g.dart';
 
+/// To-Do 追加画面の ViewModel
 @riverpod
 class AddingTodoViewModel extends _$AddingTodoViewModel {
   final AddingTodoState _addingTodoState = AddingTodoState(
@@ -18,6 +19,7 @@ class AddingTodoViewModel extends _$AddingTodoViewModel {
   @override
   AddingTodoState build() => _addingTodoState;
 
+  /// 締切期日を設定
   void setDueDateTime(DueDateTime dueDateTime) {
     state = _addingTodoState.copyWith(dueDateTime: dueDateTime);
   }
@@ -36,8 +38,10 @@ class AddingTodoState with _$AddingTodoState {
 }
 
 extension AddingTodoStateExtension on AddingTodoState {
+  /// 入力が有効かどうか
   bool get isValid => titleController.text.isNotEmpty && dueDateTime != null;
 
+  /// [TodoItem] に変換
   TodoItem toTodoItem() {
     if (!isValid) {
       throw Exception('Invalid state');

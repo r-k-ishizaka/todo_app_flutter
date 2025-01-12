@@ -9,7 +9,9 @@ part of 'adding_todo_view_model.dart';
 String _$addingTodoViewModelHash() =>
     r'8d085c977cbe63e051524b64457298ddc44cd03b';
 
-/// See also [AddingTodoViewModel].
+/// To-Do 追加画面の ViewModel
+///
+/// Copied from [AddingTodoViewModel].
 @ProviderFor(AddingTodoViewModel)
 final addingTodoViewModelProvider =
     AutoDisposeNotifierProvider<AddingTodoViewModel, AddingTodoState>.internal(
