@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/ui/pages/adding_todo/adding_todo_page.dart';
 
 import '../../../domain/models/todo_item.dart';
 import '../../../domain/models/types/due_date_time.dart';
@@ -59,11 +60,20 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO 追加ボタン押下時の処理を実装
-          _addTodoItem();
+        onPressed: () async {
+          final result = await Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const AddingTodoPage(title: 'Todoを追加')));
+          if (result != null) {
+            setState(() {
+              _todoItems.add(result as TodoItem);
+            });
+
+            if (!context.mounted) return;
+            ScaffoldMessenger.of(context)
+              ..removeCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text('TODOアイテムを追加しました')));
+          }
         },
-        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
