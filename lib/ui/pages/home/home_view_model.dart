@@ -18,4 +18,12 @@ class HomeViewModel extends _$HomeViewModel {
     _todoItems.add(todoItem);
     ref.notifyListeners();
   }
+
+  /// To-Doアイテムを完了する.
+  void completeTodoItem(int index) {
+    if (index != -1) {
+      _todoItems[index] = _todoItems[index].copyWith(isCompleted: true);
+      ref.notifyListeners();
+    }
+  }
 }
