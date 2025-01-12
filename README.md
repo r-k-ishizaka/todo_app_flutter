@@ -1,6 +1,9 @@
-# todo_app
+# TODOアプリ
+Flutter の勉強用に作成している Todo 管理アプリ
 
-todo app wo tsukurou
+以下のパッケージを使用
+- freezed
+- riverpod
 
 ## Getting Started
 
