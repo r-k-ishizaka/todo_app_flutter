@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:todo_app/domain/models/types/due_date_time.dart';
 import 'package:todo_app/ui/components/due_date_time_input_form_widget.dart';
 import 'package:todo_app/ui/components/text_input_widget.dart';
@@ -7,7 +8,7 @@ import 'package:todo_app/ui/components/text_input_widget.dart';
 import 'adding_todo_view_model.dart';
 
 /// To-Do 追加画面
-class AddingTodoPage extends ConsumerWidget {
+class AddingTodoPage extends HookConsumerWidget {
   const AddingTodoPage({super.key, required this.title});
 
   final String title;
@@ -15,6 +16,17 @@ class AddingTodoPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addingTodoViewModelProvider);
+    final controller =
+        useTextEditingController.fromValue(TextEditingValue.empty);
+
+    useEffect(() {
+      controller.addListener(() {
+        ref
+            .read(addingTodoViewModelProvider.notifier)
+            .updateTitle(controller.text);
+      });
+      return null;
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +41,7 @@ class AddingTodoPage extends ConsumerWidget {
             children: <Widget>[
               Text('タイトル', style: Theme.of(context).textTheme.labelLarge),
               TextInputWidget(
-                  controller: state.titleController, hintText: 'タイトルを入力してください'),
+                  controller: controller, hintText: 'タイトルを入力してください'),
               Text('締切日時', style: Theme.of(context).textTheme.labelLarge),
               DueDateTimeInputWidget(
                   dueDateTime: state.dueDateTime,

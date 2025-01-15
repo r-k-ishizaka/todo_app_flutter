@@ -17,8 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AddingTodoState {
   /// タイトル
-  TextEditingController get titleController =>
-      throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
 
   /// 詳細
   DueDateTime? get dueDateTime => throw _privateConstructorUsedError;
@@ -36,7 +35,7 @@ abstract class $AddingTodoStateCopyWith<$Res> {
           AddingTodoState value, $Res Function(AddingTodoState) then) =
       _$AddingTodoStateCopyWithImpl<$Res, AddingTodoState>;
   @useResult
-  $Res call({TextEditingController titleController, DueDateTime? dueDateTime});
+  $Res call({String title, DueDateTime? dueDateTime});
 }
 
 /// @nodoc
@@ -54,14 +53,14 @@ class _$AddingTodoStateCopyWithImpl<$Res, $Val extends AddingTodoState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? titleController = null,
+    Object? title = null,
     Object? dueDateTime = freezed,
   }) {
     return _then(_value.copyWith(
-      titleController: null == titleController
-          ? _value.titleController
-          : titleController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       dueDateTime: freezed == dueDateTime
           ? _value.dueDateTime
           : dueDateTime // ignore: cast_nullable_to_non_nullable
@@ -78,7 +77,7 @@ abstract class _$$AddingTodoStateImplCopyWith<$Res>
       __$$AddingTodoStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TextEditingController titleController, DueDateTime? dueDateTime});
+  $Res call({String title, DueDateTime? dueDateTime});
 }
 
 /// @nodoc
@@ -94,14 +93,14 @@ class __$$AddingTodoStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? titleController = null,
+    Object? title = null,
     Object? dueDateTime = freezed,
   }) {
     return _then(_$AddingTodoStateImpl(
-      titleController: null == titleController
-          ? _value.titleController
-          : titleController // ignore: cast_nullable_to_non_nullable
-              as TextEditingController,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       dueDateTime: freezed == dueDateTime
           ? _value.dueDateTime
           : dueDateTime // ignore: cast_nullable_to_non_nullable
@@ -113,12 +112,11 @@ class __$$AddingTodoStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddingTodoStateImpl implements _AddingTodoState {
-  const _$AddingTodoStateImpl(
-      {required this.titleController, required this.dueDateTime});
+  const _$AddingTodoStateImpl({required this.title, required this.dueDateTime});
 
   /// タイトル
   @override
-  final TextEditingController titleController;
+  final String title;
 
   /// 詳細
   @override
@@ -126,7 +124,7 @@ class _$AddingTodoStateImpl implements _AddingTodoState {
 
   @override
   String toString() {
-    return 'AddingTodoState(titleController: $titleController, dueDateTime: $dueDateTime)';
+    return 'AddingTodoState(title: $title, dueDateTime: $dueDateTime)';
   }
 
   @override
@@ -134,14 +132,13 @@ class _$AddingTodoStateImpl implements _AddingTodoState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddingTodoStateImpl &&
-            (identical(other.titleController, titleController) ||
-                other.titleController == titleController) &&
+            (identical(other.title, title) || other.title == title) &&
             (identical(other.dueDateTime, dueDateTime) ||
                 other.dueDateTime == dueDateTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, titleController, dueDateTime);
+  int get hashCode => Object.hash(runtimeType, title, dueDateTime);
 
   /// Create a copy of AddingTodoState
   /// with the given fields replaced by the non-null parameter values.
@@ -155,12 +152,12 @@ class _$AddingTodoStateImpl implements _AddingTodoState {
 
 abstract class _AddingTodoState implements AddingTodoState {
   const factory _AddingTodoState(
-      {required final TextEditingController titleController,
+      {required final String title,
       required final DueDateTime? dueDateTime}) = _$AddingTodoStateImpl;
 
   /// タイトル
   @override
-  TextEditingController get titleController;
+  String get title;
 
   /// 詳細
   @override
