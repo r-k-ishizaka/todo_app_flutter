@@ -26,7 +26,7 @@ class AddingTodoPage extends HookConsumerWidget {
             .updateTitle(controller.text);
       });
       return null;
-    }, []);
+    }, const []);
 
     return Scaffold(
       appBar: AppBar(
