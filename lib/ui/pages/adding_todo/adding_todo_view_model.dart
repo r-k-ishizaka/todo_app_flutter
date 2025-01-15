@@ -28,7 +28,7 @@ class AddingTodoViewModel extends _$AddingTodoViewModel {
   }
 }
 
-/// 追加画面の状態
+/// To-Do 追加画面の状態
 @freezed
 class AddingTodoState with _$AddingTodoState {
   const factory AddingTodoState({
@@ -40,6 +40,7 @@ class AddingTodoState with _$AddingTodoState {
   }) = _AddingTodoState;
 }
 
+/// To-Do 追加画面の状態拡張
 extension AddingTodoStateExtension on AddingTodoState {
   /// 入力が有効かどうか
   bool get isValid => title.isNotEmpty && dueDateTime != null;
