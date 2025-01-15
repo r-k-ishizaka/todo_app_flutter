@@ -25,7 +25,7 @@ class AddingTodoPage extends HookConsumerWidget {
             .read(addingTodoViewModelProvider.notifier)
             .updateTitle(controller.text);
       });
-      return () => controller.dispose();
+      return null;
     }, []);
 
     return Scaffold(
