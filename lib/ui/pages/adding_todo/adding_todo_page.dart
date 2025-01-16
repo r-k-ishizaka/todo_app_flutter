@@ -16,14 +16,11 @@ class AddingTodoPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addingTodoViewModelProvider);
-    final controller =
-        useTextEditingController.fromValue(TextEditingValue.empty);
+    final controller = useTextEditingController.fromValue(TextEditingValue.empty);
 
     useEffect(() {
       controller.addListener(() {
-        ref
-            .read(addingTodoViewModelProvider.notifier)
-            .updateTitle(controller.text);
+        ref.read(addingTodoViewModelProvider.notifier).updateTitle(controller.text);
       });
       return null;
     }, const []);
@@ -35,30 +32,27 @@ class AddingTodoPage extends HookConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-            spacing: 16,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('タイトル', style: Theme.of(context).textTheme.labelLarge),
-              TextInputWidget(
-                  controller: controller, hintText: 'タイトルを入力してください'),
-              Text('締切日時', style: Theme.of(context).textTheme.labelLarge),
-              DueDateTimeInputWidget(
-                  dueDateTime: state.dueDateTime,
-                  hintText: '締切日時を選択してください',
-                  onDueDateTimeSelected: (DueDateTime value) {
-                    ref
-                        .read(addingTodoViewModelProvider.notifier)
-                        .setDueDateTime(value);
-                  }),
-            ]),
+        child: Column(spacing: 16, crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+          Text('タイトル', style: Theme.of(context).textTheme.labelLarge),
+          TextInputWidget(
+              controller: controller,
+              hintText: 'タイトルを入力してください',
+              validator: ref.read(addingTodoViewModelProvider.notifier).titleValidator),
+          Text('締切日時', style: Theme.of(context).textTheme.labelLarge),
+          DueDateTimeInputWidget(
+              dueDateTime: state.dueDateTime,
+              hintText: '締切日時を選択してください',
+              onDueDateTimeSelected: (DueDateTime value) {
+                ref.read(addingTodoViewModelProvider.notifier).updateDueDateTime(value);
+              }),
+        ]),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: state.isValid
+        backgroundColor: ref.read(addingTodoViewModelProvider.notifier).canAddTodo
             ? Theme.of(context).floatingActionButtonTheme.backgroundColor
             : Colors.grey,
         onPressed: () {
-          if (!state.isValid) return;
+          if (!ref.read(addingTodoViewModelProvider.notifier).canAddTodo) return;
           Navigator.pop(
             context,
             state.toTodoItem(),

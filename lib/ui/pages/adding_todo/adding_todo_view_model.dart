@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo_app/domain/models/common/validation_result.dart';
 import 'package:todo_app/domain/models/types/due_date_time.dart';
+import 'package:todo_app/domain/validators/title_validator.dart';
 
 import '../../../domain/models/todo_item.dart';
 
@@ -15,17 +17,26 @@ class AddingTodoViewModel extends _$AddingTodoViewModel {
     dueDateTime: null,
   );
 
+  final _titleValidator = TitleValidator();
+
   @override
   AddingTodoState build() => _addingTodoState;
 
+  /// タイトルを更新
   void updateTitle(String title) {
     state = state.copyWith(title: title);
   }
 
-  /// 締切期日を設定
-  void setDueDateTime(DueDateTime dueDateTime) {
+  /// タイトルのバリデータ
+  TitleValidator get titleValidator => _titleValidator;
+
+  /// 締切日時を更新
+  void updateDueDateTime(DueDateTime dueDateTime) {
     state = state.copyWith(dueDateTime: dueDateTime);
   }
+
+  /// To-Do 追加可能かどうか
+  bool get canAddTodo => titleValidator.validate(state.title).isValid && state.dueDateTime != null;
 }
 
 /// To-Do 追加画面の状態
@@ -42,14 +53,8 @@ class AddingTodoState with _$AddingTodoState {
 
 /// To-Do 追加画面の状態拡張
 extension AddingTodoStateExtension on AddingTodoState {
-  /// 入力が有効かどうか
-  bool get isValid => title.isNotEmpty && dueDateTime != null;
-
   /// [TodoItem] に変換
   TodoItem toTodoItem() {
-    if (!isValid) {
-      throw Exception('Invalid state');
-    }
     return TodoItem(
       title: title,
       isCompleted: false,
