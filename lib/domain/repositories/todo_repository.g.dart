@@ -1,29 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'adding_todo_view_model.dart';
+part of 'todo_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$addingTodoViewModelHash() =>
-    r'1a39b27242fc51e89c0fd58943175e04d84bb30f';
+String _$todoRepositoryHash() => r'012f95f8ab1c141161c343deb7201d223dbc9444';
 
-/// To-Do 追加画面の ViewModel
-///
-/// Copied from [AddingTodoViewModel].
-@ProviderFor(AddingTodoViewModel)
-final addingTodoViewModelProvider =
-    AutoDisposeNotifierProvider<AddingTodoViewModel, AddingTodoState>.internal(
-  AddingTodoViewModel.new,
-  name: r'addingTodoViewModelProvider',
+/// See also [todoRepository].
+@ProviderFor(todoRepository)
+final todoRepositoryProvider = Provider<TodoRepository>.internal(
+  todoRepository,
+  name: r'todoRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$addingTodoViewModelHash,
+      : _$todoRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AddingTodoViewModel = AutoDisposeNotifier<AddingTodoState>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef TodoRepositoryRef = ProviderRef<TodoRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

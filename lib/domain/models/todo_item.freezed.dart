@@ -16,6 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TodoItem {
+  /// ID (必須)
+  String get id => throw _privateConstructorUsedError;
+
   /// タイトル (必須)
   String get title => throw _privateConstructorUsedError;
 
@@ -37,7 +40,8 @@ abstract class $TodoItemCopyWith<$Res> {
   factory $TodoItemCopyWith(TodoItem value, $Res Function(TodoItem) then) =
       _$TodoItemCopyWithImpl<$Res, TodoItem>;
   @useResult
-  $Res call({String title, bool isCompleted, DueDateTime dueDateTime});
+  $Res call(
+      {String id, String title, bool isCompleted, DueDateTime dueDateTime});
 }
 
 /// @nodoc
@@ -55,11 +59,16 @@ class _$TodoItemCopyWithImpl<$Res, $Val extends TodoItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? isCompleted = null,
     Object? dueDateTime = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -84,7 +93,8 @@ abstract class _$$TodoItemImplCopyWith<$Res>
       __$$TodoItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, bool isCompleted, DueDateTime dueDateTime});
+  $Res call(
+      {String id, String title, bool isCompleted, DueDateTime dueDateTime});
 }
 
 /// @nodoc
@@ -100,11 +110,16 @@ class __$$TodoItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? isCompleted = null,
     Object? dueDateTime = null,
   }) {
     return _then(_$TodoItemImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -125,9 +140,14 @@ class __$$TodoItemImplCopyWithImpl<$Res>
 
 class _$TodoItemImpl implements _TodoItem {
   const _$TodoItemImpl(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.isCompleted,
       required this.dueDateTime});
+
+  /// ID (必須)
+  @override
+  final String id;
 
   /// タイトル (必須)
   @override
@@ -143,7 +163,7 @@ class _$TodoItemImpl implements _TodoItem {
 
   @override
   String toString() {
-    return 'TodoItem(title: $title, isCompleted: $isCompleted, dueDateTime: $dueDateTime)';
+    return 'TodoItem(id: $id, title: $title, isCompleted: $isCompleted, dueDateTime: $dueDateTime)';
   }
 
   @override
@@ -151,6 +171,7 @@ class _$TodoItemImpl implements _TodoItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TodoItemImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.isCompleted, isCompleted) ||
                 other.isCompleted == isCompleted) &&
@@ -159,7 +180,8 @@ class _$TodoItemImpl implements _TodoItem {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, isCompleted, dueDateTime);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, isCompleted, dueDateTime);
 
   /// Create a copy of TodoItem
   /// with the given fields replaced by the non-null parameter values.
@@ -172,9 +194,14 @@ class _$TodoItemImpl implements _TodoItem {
 
 abstract class _TodoItem implements TodoItem {
   const factory _TodoItem(
-      {required final String title,
+      {required final String id,
+      required final String title,
       required final bool isCompleted,
       required final DueDateTime dueDateTime}) = _$TodoItemImpl;
+
+  /// ID (必須)
+  @override
+  String get id;
 
   /// タイトル (必須)
   @override
