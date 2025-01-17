@@ -54,9 +54,10 @@ class AddingTodoState with _$AddingTodoState {
 
 /// To-Do 追加画面の状態拡張
 extension AddingTodoStateExtension on AddingTodoState {
-  /// [TodoItem] に変換
+  /// [TodoItem] に変換 TODO 不要になるため、後で削除
   TodoItem toTodoItem() {
     return TodoItem(
+      id: "",
       title: title,
       isCompleted: false,
       dueDateTime: dueDateTime!,

@@ -7,6 +7,9 @@ part 'todo_item.freezed.dart';
 @freezed
 class TodoItem with _$TodoItem {
   const factory TodoItem({
+    /// ID (必須)
+    required String id,
+
     /// タイトル (必須)
     required String title,
 
