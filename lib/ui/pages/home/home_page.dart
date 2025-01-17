@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/ui/pages/adding_todo/adding_todo_page.dart';
 import 'package:todo_app/ui/pages/home/home_view_model.dart';
 
-import '../../../domain/models/todo_item.dart';
 import '../../components/todo_item_widget.dart';
 
 /// ホーム画面
@@ -30,9 +29,7 @@ class HomePage extends ConsumerWidget {
               TodoItemWidget(
                 todoItem: todoItems[index],
                 onToggle: () {
-                  ref
-                      .read(homeViewModelProvider.notifier)
-                      .completeTodoItem(index);
+                  ref.read(homeViewModelProvider.notifier).completeTodoItem(index);
                 },
               ),
               if (index != todoItems.length - 1) const Divider(),
@@ -42,17 +39,15 @@ class HomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const AddingTodoPage(title: 'Todoを追加')));
+          final result =
+              await Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddingTodoPage(title: 'Todoを追加')));
           if (result != null) {
-            ref
-                .read(homeViewModelProvider.notifier)
-                .addTodoItem(result as TodoItem);
-
             if (!context.mounted) return;
             ScaffoldMessenger.of(context)
               ..removeCurrentSnackBar()
               ..showSnackBar(SnackBar(content: Text('TODOアイテムを追加しました')));
+
+            ref.read(homeViewModelProvider.notifier).fetchTodoItems();
           }
         },
         child: const Icon(Icons.add),
