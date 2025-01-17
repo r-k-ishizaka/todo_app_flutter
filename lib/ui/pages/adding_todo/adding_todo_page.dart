@@ -51,11 +51,15 @@ class AddingTodoPage extends HookConsumerWidget {
         backgroundColor: ref.read(addingTodoViewModelProvider.notifier).canAddTodo
             ? Theme.of(context).floatingActionButtonTheme.backgroundColor
             : Colors.grey,
-        onPressed: () {
+        onPressed: () async {
           if (!ref.read(addingTodoViewModelProvider.notifier).canAddTodo) return;
+          await ref.read(addingTodoViewModelProvider.notifier).addTodo();
+
+          // 画面が破棄されている場合は何もしない
+          if (!context.mounted) return;
           Navigator.pop(
             context,
-            state.toTodoItem(),
+            'success',
           );
         },
         child: const Icon(Icons.save),
