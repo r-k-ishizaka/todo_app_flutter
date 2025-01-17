@@ -12,15 +12,16 @@ part 'adding_todo_view_model.g.dart';
 /// To-Do 追加画面の ViewModel
 @riverpod
 class AddingTodoViewModel extends _$AddingTodoViewModel {
-  final AddingTodoState _addingTodoState = AddingTodoState(
-    title: "",
-    dueDateTime: null,
-  );
-
-  final _titleValidator = TitleValidator();
+  late final TitleValidator _titleValidator;
 
   @override
-  AddingTodoState build() => _addingTodoState;
+  AddingTodoState build() {
+    _titleValidator = ref.read(titleValidatorProvider);
+    return AddingTodoState(
+      title: "",
+      dueDateTime: null,
+    );
+  }
 
   /// タイトルを更新
   void updateTitle(String title) {
