@@ -4,7 +4,6 @@ import 'package:todo_app/domain/models/common/validation_result.dart';
 import 'package:todo_app/domain/models/types/due_date_time.dart';
 import 'package:todo_app/domain/validators/title_validator.dart';
 
-import '../../../domain/models/todo_item.dart';
 import '../../../domain/repositories/todo_repository.dart';
 
 part 'adding_todo_view_model.freezed.dart';
@@ -63,17 +62,4 @@ class AddingTodoState with _$AddingTodoState {
     /// 詳細
     required DueDateTime? dueDateTime,
   }) = _AddingTodoState;
-}
-
-/// To-Do 追加画面の状態拡張
-extension AddingTodoStateExtension on AddingTodoState {
-  /// [TodoItem] に変換 TODO 不要になるため、後で削除
-  TodoItem toTodoItem() {
-    return TodoItem(
-      id: "",
-      title: title,
-      isCompleted: false,
-      dueDateTime: dueDateTime!,
-    );
-  }
 }
