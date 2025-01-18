@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/domain/models/todo_item.dart';
 
-import '../../data/repositories/todo_repository.dart';
+import '../../data/db/sqflite/repositories/todo_repository.dart';
 import '../models/types/due_date_time.dart';
 
 part 'todo_repository.g.dart';

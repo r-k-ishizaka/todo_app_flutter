@@ -1,7 +1,7 @@
 import 'package:todo_app/domain/models/todo_item.dart';
 
-import '../../domain/models/types/due_date_time.dart';
-import '../../domain/repositories/todo_repository.dart';
+import '../../../../domain/models/types/due_date_time.dart';
+import '../../../../domain/repositories/todo_repository.dart';
 
 class TodoRepositoryImpl implements TodoRepository {
   final cache = <TodoItem>[];
