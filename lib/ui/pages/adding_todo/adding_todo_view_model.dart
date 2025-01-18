@@ -13,12 +13,11 @@ part 'adding_todo_view_model.g.dart';
 /// To-Do 追加画面の ViewModel
 @riverpod
 class AddingTodoViewModel extends _$AddingTodoViewModel {
-  late final TitleValidator _titleValidator;
+  late final _titleValidator = ref.read(titleValidatorProvider);
   late final _todoRepository = ref.read(todoRepositoryProvider);
 
   @override
   AddingTodoState build() {
-    _titleValidator = ref.read(titleValidatorProvider);
     return AddingTodoState(
       title: "",
       dueDateTime: null,
