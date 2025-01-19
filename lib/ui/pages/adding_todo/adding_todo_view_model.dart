@@ -4,7 +4,7 @@ import 'package:todo_app/domain/models/common/validation_result.dart';
 import 'package:todo_app/domain/models/types/due_date_time.dart';
 import 'package:todo_app/domain/validators/title_validator.dart';
 
-import '../../../domain/repositories/todo_repository.dart';
+import '../../../domain/use_cases/add_todo_use_case.dart';
 
 part 'adding_todo_view_model.freezed.dart';
 part 'adding_todo_view_model.g.dart';
@@ -13,7 +13,7 @@ part 'adding_todo_view_model.g.dart';
 @riverpod
 class AddingTodoViewModel extends _$AddingTodoViewModel {
   late final _titleValidator = ref.read(titleValidatorProvider);
-  late final _todoRepository = ref.read(todoRepositoryProvider);
+  late final _addTodoUseCase = ref.read(addTodoUseCaseProvider);
 
   @override
   AddingTodoState build() {
@@ -40,15 +40,17 @@ class AddingTodoViewModel extends _$AddingTodoViewModel {
   bool get canAddTodo => titleValidator.validate(state.title).isValid && state.dueDateTime != null;
 
   /// To-Do を追加
-  Future<void> addTodo() async {
+  void addTodo(Function onSuccess) async {
     if (!canAddTodo) {
       throw Exception("To-Do を追加できません");
     }
 
-    return await _todoRepository.addTodo(
-      state.title,
-      state.dueDateTime!,
+    await _addTodoUseCase(
+      title: state.title,
+      dueDateTime: state.dueDateTime!,
     );
+
+    onSuccess();
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:todo_app/domain/models/todo_item.dart';
+import 'package:todo_app/domain/use_cases/complete_todo_use_case.dart';
 
 import '../../../domain/repositories/todo_repository.dart';
 
@@ -11,6 +12,7 @@ part 'home_view_model.g.dart';
 @riverpod
 class HomeViewModel extends _$HomeViewModel {
   late final _todoRepository = ref.read(todoRepositoryProvider);
+  late final _completeTodoUseCase = ref.read(completeTodoUseCaseProvider);
 
   @override
   HomeState build() => HomeState.initial();
@@ -27,7 +29,7 @@ class HomeViewModel extends _$HomeViewModel {
   void completeTodoItem(String id) async {
     if (state.isLoading) return;
     state = state.getLoadStartState();
-    await _todoRepository.completeTodoById(id);
+    await _completeTodoUseCase(id: id);
     final items = await _todoRepository.fetchTodoItems();
     state = state.getFetchTodoItemsState(items);
   }
@@ -67,11 +69,11 @@ extension HomeStateExtension on HomeState {
       );
 
   /// データ取得完了時の状態を返却する.
-  HomeState getFetchTodoItemsState(List<TodoItem> items) => when(
+  HomeState getFetchTodoItemsState(List<TodoItem> newItems) => when(
         initial: () => throw Exception('初期表示状態からの遷移は不正です'),
-        loading: () => HomeState.loaded(items),
+        loading: () => HomeState.loaded(newItems),
         loaded: (items) => throw Exception('データ取得完了状態からの遷移は不正です'),
-        additionalLoading: (items) => HomeState.loaded(items),
+        additionalLoading: (oldItems) => HomeState.loaded(newItems),
         error: () => throw Exception('エラー状態からの遷移は不正です'),
       );
 }
