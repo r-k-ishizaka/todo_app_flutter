@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'todo_repository.dart';
+part of 'add_todo_use_case.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$todoRepositoryHash() => r'0d8faf8f6541ee6a606dd0f940090b1d88aa161a';
+String _$addTodoUseCaseHash() => r'85e40967c781e8fc382d2aa465c20c8e98ba0787';
 
-/// See also [todoRepository].
-@ProviderFor(todoRepository)
-final todoRepositoryProvider = Provider<TodoRepository>.internal(
-  todoRepository,
-  name: r'todoRepositoryProvider',
+/// See also [addTodoUseCase].
+@ProviderFor(addTodoUseCase)
+final addTodoUseCaseProvider = Provider<AddTodoUseCase>.internal(
+  addTodoUseCase,
+  name: r'addTodoUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$todoRepositoryHash,
+      : _$addTodoUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef TodoRepositoryRef = ProviderRef<TodoRepository>;
+typedef AddTodoUseCaseRef = ProviderRef<AddTodoUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -53,14 +53,14 @@ class AddingTodoPage extends HookConsumerWidget {
             : Colors.grey,
         onPressed: () async {
           if (!ref.read(addingTodoViewModelProvider.notifier).canAddTodo) return;
-          await ref.read(addingTodoViewModelProvider.notifier).addTodo();
-
-          // 画面が破棄されている場合は何もしない
-          if (!context.mounted) return;
-          Navigator.pop(
-            context,
-            'success',
-          );
+          ref.read(addingTodoViewModelProvider.notifier).addTodo(() {
+            // 画面が破棄されている場合は何もしない
+            if (!context.mounted) return;
+            Navigator.pop(
+              context,
+              'success',
+            );
+          });
         },
         child: const Icon(Icons.save),
       ),
