@@ -12,15 +12,14 @@ title: アーキテクチャ - クラス図
 classDiagram
   direction LR
     Component <.. Page
-    Component ..> Model
-    Component ..> Validator
     Page ..> ViewModel
-    Page ..> Model
-    Page ..> Validator
     ViewModel ..> Repository
+    ViewModel ..> UseCase
     ViewModel ..> Validator
-    ViewModel ..> Model
+    UseCase ..> Repository
+    Repository ..> Model
     Repository <|-- RepositoryImpl
+    RepositoryImpl ..> DatabaseHelper
 
     namespace UI {
       class Component {
@@ -34,6 +33,8 @@ classDiagram
       class Repository{
         <<interface>>
       }
+      class UseCase{
+      }
       class Validator{
       }
       class Model {
@@ -41,6 +42,8 @@ classDiagram
     }
     namespace Data {
       class RepositoryImpl{
+      }
+      class DatabaseHelper{
       }
     }
 
