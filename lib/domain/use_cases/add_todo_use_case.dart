@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '../models/common/result.dart';
 import '../models/todo_item.dart';
 import '../models/types/due_date_time.dart';
 import '../repositories/todo_repository.dart';
@@ -15,7 +16,7 @@ class AddTodoUseCase {
   final TodoRepository todoRepository;
 
   /// To-Do アイテムを追加
-  Future<void> call({
+  Future<Result<void>> call({
     required String title,
     required DueDateTime dueDateTime,
   }) async {
@@ -26,7 +27,7 @@ class AddTodoUseCase {
       dueDateTime: dueDateTime,
     );
 
-    await todoRepository.addTodo(
+    return await todoRepository.addTodo(
       todoItem,
     );
   }

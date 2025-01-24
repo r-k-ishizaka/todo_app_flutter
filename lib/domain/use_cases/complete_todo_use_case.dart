@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo_app/domain/models/todo_item.dart';
 
+import '../models/common/result.dart';
 import '../repositories/todo_repository.dart';
 
 part 'complete_todo_use_case.g.dart';
@@ -12,20 +14,15 @@ class CompleteTodoUseCase {
   final TodoRepository todoRepository;
 
   /// To-Do アイテムを完了
-  Future<void> call({
+  Future<Result<void>> call({
     required String id,
   }) async {
-    /// 取得
-    final todoItem = await todoRepository.fetchTodoItemById(id);
-
-    /// 更新
-    await todoRepository.updateTodo(
-      todoItem.copyWith(
-        isCompleted: true,
-      ),
-    );
-
-    return;
+    return await todoRepository.fetchTodoItemById(id).then(
+          (value) => value.when(
+            success: (todoItem) => Result<TodoItem>.success(todoItem),
+            error: (exception) => Result<TodoItem>.error(exception),
+          ),
+        );
   }
 }
 
