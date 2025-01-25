@@ -7,7 +7,7 @@ part of 'adding_todo_view_model.dart';
 // **************************************************************************
 
 String _$addingTodoViewModelHash() =>
-    r'5c46e99198b4e01efb1616b590380336392090f6';
+    r'4973752a588fc3a965bbb123437ee821d0131469';
 
 /// To-Do 追加画面の ViewModel
 ///
