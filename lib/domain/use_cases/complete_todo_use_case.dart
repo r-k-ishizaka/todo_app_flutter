@@ -19,7 +19,10 @@ class CompleteTodoUseCase {
   }) async {
     return await todoRepository.fetchTodoItemById(id).then(
           (value) => value.when(
-            success: (todoItem) => Result<TodoItem>.success(todoItem),
+            success: (todoItem) {
+              final updatedTodoItem = todoItem.copyWith(isCompleted: true);
+              return todoRepository.updateTodo(updatedTodoItem);
+            },
             error: (exception) => Result<TodoItem>.error(exception),
           ),
         );
