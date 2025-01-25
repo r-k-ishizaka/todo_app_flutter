@@ -21,8 +21,16 @@ class HomeViewModel extends _$HomeViewModel {
   void fetchTodoItems() async {
     if (state.isLoading) return;
     state = state.getLoadStartState();
-    final items = await _todoRepository.fetchTodoItems();
-    state = state.getFetchTodoItemsState(items);
+    final result = await _todoRepository.fetchTodoItems();
+    result.when(
+      success: (result) {
+        final items = result;
+        state = state.getFetchTodoItemsState(items);
+      },
+      error: (error) {
+        state = HomeState.error();
+      },
+    );
   }
 
   /// To-Doアイテムを完了する.
@@ -30,8 +38,16 @@ class HomeViewModel extends _$HomeViewModel {
     if (state.isLoading) return;
     state = state.getLoadStartState();
     await _completeTodoUseCase(id: id);
-    final items = await _todoRepository.fetchTodoItems();
-    state = state.getFetchTodoItemsState(items);
+    final result = await _todoRepository.fetchTodoItems();
+    result.when(
+      success: (result) {
+        final items = result;
+        state = state.getFetchTodoItemsState(items);
+      },
+      error: (error) {
+        state = HomeState.error();
+      },
+    );
   }
 }
 
