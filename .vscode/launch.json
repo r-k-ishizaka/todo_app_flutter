@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configuration": [
+    {
+      "name": "TodoApp Dev",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": ["--flavor", "dev", "--target", "lib/main.dart"]
+    },
+    {
+      "name": "TodoApp Stg",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": ["--flavor", "stg", "--target", "lib/main.dart"]
+    },
+    {
+      "name": "TodoApp Prod",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": ["--flavor", "prod", "--target", "lib/main.dart"]
+    }
+  ],
+  "conpounds": []
+}
